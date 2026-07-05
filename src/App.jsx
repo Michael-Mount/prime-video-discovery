@@ -9,6 +9,10 @@ import MovieGrid from "./components/MovieGrid";
 import MovieModal from "./components/MovieModal";
 import WatchlistSection from "./components/WatchlistSection";
 import ContentRail from "./components/ContentRail";
+import {
+  ContentRailSkeleton,
+  MovieGridSkeleton,
+} from "./components/LoadingSkeleton";
 
 import { movies } from "./data/movie";
 
@@ -16,6 +20,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [watchlist, setWatchlist] = useState(() => {
     const savedWatchlist = localStorage.getItem("prime-discover-watchlist");
@@ -25,6 +30,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem("prime-discover-watchlist", JSON.stringify(watchlist));
   }, [watchlist]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const featuredMovie = movies.find((movie) => movie.featured);
 
@@ -94,33 +107,44 @@ function App() {
         onToggleWatchlist={handleToggleWatchlist}
         onMovieSelect={setSelectedMovie}
       />
-      <ContentRail
-        title="Trending Now"
-        description="Popular picks based on strong match scores and featured discovery content."
-        movies={trendingMovies}
-        onMovieSelect={setSelectedMovie}
-      />
+      {isLoading ? (
+        <>
+          <ContentRailSkeleton title="Trending Now" />
+          <ContentRailSkeleton title="High Match Picks" />
+          <ContentRailSkeleton title="Sci-Fi Picks" />
+          <ContentRailSkeleton title="Action & Thriller" />
+        </>
+      ) : (
+        <>
+          <ContentRail
+            title="Trending Now"
+            description="Popular picks based on strong match scores and featured discovery content."
+            movies={trendingMovies}
+            onMovieSelect={setSelectedMovie}
+          />
 
-      <ContentRail
-        title="High Match Picks"
-        description="Movies with the strongest match percentage for quick discovery."
-        movies={highMatchMovies}
-        onMovieSelect={setSelectedMovie}
-      />
+          <ContentRail
+            title="High Match Picks"
+            description="Movies with the strongest match percentage for quick discovery."
+            movies={highMatchMovies}
+            onMovieSelect={setSelectedMovie}
+          />
 
-      <ContentRail
-        title="Sci-Fi Picks"
-        description="Futuristic stories, space exploration, and technology-driven worlds."
-        movies={sciFiMovies}
-        onMovieSelect={setSelectedMovie}
-      />
+          <ContentRail
+            title="Sci-Fi Picks"
+            description="Futuristic stories, space exploration, and technology-driven worlds."
+            movies={sciFiMovies}
+            onMovieSelect={setSelectedMovie}
+          />
 
-      <ContentRail
-        title="Action & Thriller"
-        description="Fast-paced stories with tension, stakes, and momentum."
-        movies={actionThrillerMovies}
-        onMovieSelect={setSelectedMovie}
-      />
+          <ContentRail
+            title="Action & Thriller"
+            description="Fast-paced stories with tension, stakes, and momentum."
+            movies={actionThrillerMovies}
+            onMovieSelect={setSelectedMovie}
+          />
+        </>
+      )}
       <section id="movies" className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -151,7 +175,11 @@ function App() {
           />
         </div>
 
-        <MovieGrid movies={filteredMovies} onMovieSelect={setSelectedMovie} />
+        {isLoading ? (
+          <MovieGridSkeleton />
+        ) : (
+          <MovieGrid movies={filteredMovies} onMovieSelect={setSelectedMovie} />
+        )}
       </section>
 
       <WatchlistSection
