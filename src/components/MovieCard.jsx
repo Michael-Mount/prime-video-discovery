@@ -2,7 +2,7 @@ export default function MovieCard({ movie }) {
   return (
     <article className="group overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 transition hover:-translate-y-1 hover:bg-white/10 hover:ring-white/20 focus-within:ring-2 focus-within:ring-sky-400">
       <button type="button" className="block w-full text-left">
-        <div className="aspect-[16/10] overflow-hidden">
+        <div className="aspect-16/10 overflow-hidden">
           <img
             src={movie.image}
             alt={`${movie.title} poster`}
