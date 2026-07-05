@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 import GenreFilter from "./components/GenreFilter";
 import MovieGrid from "./components/MovieGrid";
 import MovieModal from "./components/MovieModal";
+import WatchlistSection from "./components/WatchlistSection";
 
 import { movies } from "./data/movie";
 
@@ -55,6 +56,14 @@ function App() {
     });
   }
 
+  function handleRemoveFromWatchlist(movie) {
+    setWatchlist((currentWatchlist) =>
+      currentWatchlist.filter(
+        (watchlistMovie) => watchlistMovie.id !== movie.id,
+      ),
+    );
+  }
+
   const isSelectedMovieInWatchlist = selectedMovie
     ? watchlist.some((movie) => movie.id === selectedMovie.id)
     : false;
@@ -97,6 +106,12 @@ function App() {
         <MovieGrid movies={filteredMovies} onMovieSelect={setSelectedMovie} />
       </section>
 
+      <WatchlistSection
+        watchlist={watchlist}
+        onMovieSelect={setSelectedMovie}
+        onRemoveFromWatchlist={handleRemoveFromWatchlist}
+      />
+
       {selectedMovie && (
         <MovieModal
           movie={selectedMovie}
@@ -108,5 +123,4 @@ function App() {
     </main>
   );
 }
-
 export default App;
