@@ -71,8 +71,16 @@ function App() {
   return (
     <main id="top" className="min-h-screen bg-gray-950 text-white">
       <Header watchlistCount={watchlist.length} />
-      <Hero movie={featuredMovie} />
-
+      <Hero
+        movie={featuredMovie}
+        isInWatchlist={
+          featuredMovie
+            ? watchlist.some((movie) => movie.id === featuredMovie.id)
+            : false
+        }
+        onToggleWatchlist={handleToggleWatchlist}
+        onMovieSelect={setSelectedMovie}
+      />
       <section id="movies" className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
