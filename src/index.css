@@ -33,3 +33,11 @@ body {
 .animate-fade-up {
   animation: fade-up 700ms ease-out both;
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

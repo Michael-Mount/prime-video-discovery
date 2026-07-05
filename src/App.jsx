@@ -8,6 +8,7 @@ import GenreFilter from "./components/GenreFilter";
 import MovieGrid from "./components/MovieGrid";
 import MovieModal from "./components/MovieModal";
 import WatchlistSection from "./components/WatchlistSection";
+import ContentRail from "./components/ContentRail";
 
 import { movies } from "./data/movie";
 
@@ -39,6 +40,18 @@ function App() {
 
     return matchesSearch && matchesGenre;
   });
+
+  const trendingMovies = [...movies]
+    .sort((a, b) => b.match - a.match)
+    .slice(0, 6);
+
+  const highMatchMovies = movies.filter((movie) => movie.match >= 88);
+
+  const sciFiMovies = movies.filter((movie) => movie.genre === "Sci-Fi");
+
+  const actionThrillerMovies = movies.filter(
+    (movie) => movie.genre === "Action" || movie.genre === "Thriller",
+  );
 
   function handleToggleWatchlist(movie) {
     setWatchlist((currentWatchlist) => {
@@ -79,6 +92,33 @@ function App() {
             : false
         }
         onToggleWatchlist={handleToggleWatchlist}
+        onMovieSelect={setSelectedMovie}
+      />
+      <ContentRail
+        title="Trending Now"
+        description="Popular picks based on strong match scores and featured discovery content."
+        movies={trendingMovies}
+        onMovieSelect={setSelectedMovie}
+      />
+
+      <ContentRail
+        title="High Match Picks"
+        description="Movies with the strongest match percentage for quick discovery."
+        movies={highMatchMovies}
+        onMovieSelect={setSelectedMovie}
+      />
+
+      <ContentRail
+        title="Sci-Fi Picks"
+        description="Futuristic stories, space exploration, and technology-driven worlds."
+        movies={sciFiMovies}
+        onMovieSelect={setSelectedMovie}
+      />
+
+      <ContentRail
+        title="Action & Thriller"
+        description="Fast-paced stories with tension, stakes, and momentum."
+        movies={actionThrillerMovies}
         onMovieSelect={setSelectedMovie}
       />
       <section id="movies" className="mx-auto max-w-7xl px-6 py-12 lg:px-8">

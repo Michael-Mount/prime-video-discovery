@@ -83,4 +83,88 @@ export const movies = [
       "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80",
     featured: false,
   },
+  {
+    id: 7,
+    title: "Glass Harbor",
+    genre: "Drama",
+    year: 2026,
+    rating: "PG-13",
+    duration: "1h 52m",
+    match: 86,
+    description:
+      "A family-owned harbor hotel becomes the center of a quiet conflict when a developer threatens the town’s future.",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
+  {
+    id: 8,
+    title: "Redline Protocol",
+    genre: "Action",
+    year: 2025,
+    rating: "PG-13",
+    duration: "2h 6m",
+    match: 93,
+    description:
+      "A former security analyst is pulled into a citywide chase after discovering a hidden surveillance program.",
+    image:
+      "https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
+  {
+    id: 9,
+    title: "After the Storm",
+    genre: "Mystery",
+    year: 2024,
+    rating: "PG",
+    duration: "1h 43m",
+    match: 80,
+    description:
+      "After a coastal storm uncovers a forgotten case, a journalist follows clues buried for decades.",
+    image:
+      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
+  {
+    id: 10,
+    title: "Solar Drift",
+    genre: "Sci-Fi",
+    year: 2026,
+    rating: "PG-13",
+    duration: "2h 12m",
+    match: 90,
+    description:
+      "A pilot transporting solar cargo across deep space discovers that someone onboard is not who they claim to be.",
+    image:
+      "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
+  {
+    id: 11,
+    title: "The Quiet Room",
+    genre: "Thriller",
+    year: 2025,
+    rating: "R",
+    duration: "1h 49m",
+    match: 88,
+    description:
+      "A crisis negotiator enters a locked-down research facility where every conversation changes the outcome.",
+    image:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
+  {
+    id: 12,
+    title: "Golden Hour",
+    genre: "Drama",
+    year: 2023,
+    rating: "PG",
+    duration: "1h 38m",
+    match: 76,
+    description:
+      "A photographer returns home to document one final summer with the people who shaped his childhood.",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+    featured: false,
+  },
 ];
