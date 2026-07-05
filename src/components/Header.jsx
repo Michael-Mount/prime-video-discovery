@@ -11,12 +11,13 @@ export default function Header({ watchlistCount = 0 }) {
           href="#top"
           className="text-xl font-bold tracking-tight text-white transition hover:text-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950"
         >
-          Prime <span className="text-sky-400">Discover</span>
+          Prime<span className="text-sky-400">Discover</span>
         </a>
-        {/* Desktop Nav */}
+
+        {/* Desktop nav */}
         <nav
           className="hidden items-center gap-8 md:flex"
-          aria-label="Main Navigation"
+          aria-label="Main navigation"
         >
           <a
             href="#movies"
@@ -24,29 +25,36 @@ export default function Header({ watchlistCount = 0 }) {
           >
             Movies
           </a>
+
           <a
             href="#genres"
             className="text-sm font-medium text-gray-300 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950"
           >
             Genres
           </a>
+
           <a
-            href="#recent"
+            href="#watchlist"
             className="text-sm font-medium text-gray-300 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950"
           >
-            Recently Watched
+            Watchlist
           </a>
         </nav>
-        {/* Desktop Watchlist button */}
+
+        {/* Desktop watchlist link */}
         <div className="hidden md:block">
-          <button className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950">
+          <a
+            href="#watchlist"
+            className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950"
+          >
             Watchlist
             <span className="ml-2 rounded-full bg-sky-400 px-2 py-0.5 text-xs font-bold text-gray-950">
               {watchlistCount}
             </span>
-          </button>
+          </a>
         </div>
-        {/* Mobile Menu Button */}
+
+        {/* Mobile menu button */}
         <button
           type="button"
           className="rounded-md p-2 text-gray-200 transition hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-950 md:hidden"
@@ -60,7 +68,8 @@ export default function Header({ watchlistCount = 0 }) {
           <span className="mt-1.5 block h-0.5 w-6 bg-current"></span>
         </button>
       </div>
-      {/* Mobile Menu */}
+
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div
           id="mobile-menu"
@@ -84,19 +93,23 @@ export default function Header({ watchlistCount = 0 }) {
             </a>
 
             <a
-              href="#recent"
+              href="#watchlist"
               className="text-sm font-medium text-gray-300 transition hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-400"
               onClick={() => setIsMenuOpen(false)}
             >
-              Recently Watched
+              Watchlist
             </a>
 
-            <button className="mt-2 w-full rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400">
+            <a
+              href="#watchlist"
+              className="mt-2 inline-flex w-full justify-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-sky-400"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Watchlist
               <span className="ml-2 rounded-full bg-sky-400 px-2 py-0.5 text-xs font-bold text-gray-950">
                 {watchlistCount}
               </span>
-            </button>
+            </a>
           </nav>
         </div>
       )}
