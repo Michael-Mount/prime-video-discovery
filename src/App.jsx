@@ -1,4 +1,5 @@
 import "./App.css";
+import Header from "./components/Header";
 import Hero from "./components/Hero";
 import { movies } from "./data/movie";
 
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <main className="min-h-screen bg-gray-950 text-white">
+        <Header watchlistCount={0} />
         <Hero movie={featuredMovie} />
       </main>
     </>
