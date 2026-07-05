@@ -27,9 +27,24 @@ function App() {
     return savedWatchlist ? JSON.parse(savedWatchlist) : [];
   });
 
+  const [recentlyWatched, setRecentlyWatched] = useState(() => {
+    const savedRecentlyWatched = localStorage.getItem(
+      "prime-discover-recently-watched",
+    );
+
+    return savedRecentlyWatched ? JSON.parse(savedRecentlyWatched) : [];
+  });
+
   useEffect(() => {
     localStorage.setItem("prime-discover-watchlist", JSON.stringify(watchlist));
   }, [watchlist]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "prime-discover-recently-watched",
+      JSON.stringify(recentlyWatched),
+    );
+  }, [recentlyWatched]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,6 +80,18 @@ function App() {
   const actionThrillerMovies = movies.filter(
     (movie) => movie.genre === "Action" || movie.genre === "Thriller",
   );
+
+  function handleMovieSelect(movie) {
+    setSelectedMovie(movie);
+
+    setRecentlyWatched((currentRecentlyWatched) => {
+      const withoutSelectedMovie = currentRecentlyWatched.filter(
+        (recentMovie) => recentMovie.id !== movie.id,
+      );
+
+      return [movie, ...withoutSelectedMovie].slice(0, 6);
+    });
+  }
 
   function handleToggleWatchlist(movie) {
     setWatchlist((currentWatchlist) => {
@@ -120,28 +147,35 @@ function App() {
             title="Trending Now"
             description="Popular picks based on strong match scores and featured discovery content."
             movies={trendingMovies}
-            onMovieSelect={setSelectedMovie}
+            onMovieSelect={handleMovieSelect}
           />
 
           <ContentRail
             title="High Match Picks"
             description="Movies with the strongest match percentage for quick discovery."
             movies={highMatchMovies}
-            onMovieSelect={setSelectedMovie}
+            onMovieSelect={handleMovieSelect}
           />
 
           <ContentRail
             title="Sci-Fi Picks"
             description="Futuristic stories, space exploration, and technology-driven worlds."
             movies={sciFiMovies}
-            onMovieSelect={setSelectedMovie}
+            onMovieSelect={handleMovieSelect}
           />
 
           <ContentRail
             title="Action & Thriller"
             description="Fast-paced stories with tension, stakes, and momentum."
             movies={actionThrillerMovies}
-            onMovieSelect={setSelectedMovie}
+            onMovieSelect={handleMovieSelect}
+          />
+
+          <ContentRail
+            title="Recently Watched"
+            description="Movies you opened recently so you can quickly return to them."
+            movies={recentlyWatched}
+            onMovieSelect={handleMovieSelect}
           />
         </>
       )}
@@ -178,13 +212,16 @@ function App() {
         {isLoading ? (
           <MovieGridSkeleton />
         ) : (
-          <MovieGrid movies={filteredMovies} onMovieSelect={setSelectedMovie} />
+          <MovieGrid
+            movies={filteredMovies}
+            onMovieSelect={handleMovieSelect}
+          />
         )}
       </section>
 
       <WatchlistSection
         watchlist={watchlist}
-        onMovieSelect={setSelectedMovie}
+        onMovieSelect={handleMovieSelect}
         onRemoveFromWatchlist={handleRemoveFromWatchlist}
       />
 
